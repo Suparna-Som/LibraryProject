@@ -33,17 +33,15 @@ public class LibraryController {
     }
 
     @PutMapping("/updateLibraryDetails")
-    public int updateLibraryDetail(){
-     int studentId = 5;
-     String bookName = "JAVA";
+    public int updateLibraryDetail(@RequestParam int studentId,@RequestParam String bookName){
     int updatedRow = 0;
     updatedRow = libraryServices.updateLibraryDetail(studentId,bookName);
     return updatedRow;
     }
 
     @DeleteMapping("/deleteLibraryDetails")
-    public int deleteLibraryDetail() throws IOException {
-        int studentId=3;
+    public int deleteLibraryDetail(@RequestParam int studentId) throws IOException {
+        //int studentId=3;
         int deletedRow=0;
         deletedRow=libraryServices.deleteLibraryDetail(studentId);
         return deletedRow;
