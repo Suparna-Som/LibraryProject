@@ -1,11 +1,16 @@
 package com.ifanow.LibraryProject.LibrarayModel;
 
 import org.springframework.stereotype.Component;
-
+@Component
 public class LibraryModel {
     public int studentId,numberOfBook;
     public String studentName,bookName,issueDate,returnDate,librarian;
 
+
+
+    public LibraryModel() {
+
+    }
 
     public int getStudentId() {
         return studentId;
