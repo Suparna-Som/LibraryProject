@@ -28,13 +28,20 @@ public class LibraryServices {
     @Autowired
     private Gson gson;
 
-    public LibraryModel saveOrderDetails(LibraryModel libraryModel){
-
+    public int saveLibraryDetails( int studentId, String studentName, String bookName, String issueDate, String returnDate, int numberOfBook, String librarian){
+        int show = 0;
         try {
 
             connection = libraryGetConnection.getconnect();
 
             PreparedStatement stmt = connection.prepareStatement(libraryDAO.storeLibraryData);
+            libraryModel.setStudentId(studentId);
+            libraryModel.setStudentName(studentName);
+            libraryModel.setBookName(bookName);
+            libraryModel.setIssueDate(issueDate);
+            libraryModel.setReturnDate(returnDate);
+            libraryModel.setNumberOfBook(numberOfBook);
+            libraryModel.setLibrarian(librarian);
             stmt.setInt(1,libraryModel.getStudentId());
             stmt.setString(2,libraryModel.getStudentName() );
             stmt.setString(3,libraryModel.getBookName());
@@ -42,17 +49,16 @@ public class LibraryServices {
             stmt.setString(5,libraryModel.getReturnDate());
             stmt.setInt(6,libraryModel.getNumberOfBook());
             stmt.setString(7,libraryModel.getLibrarian());
-
-
-            stmt.executeUpdate();
+            show = stmt.executeUpdate();
             System.out.println("Records inserted successfully");
+
             connection.close();
             System.out.println("Connection closed");
         }
         catch(SQLException e){
             e.printStackTrace();
         }
-        return libraryModel;
+        return show;
     }
     public List showAllLibraryDetail() {
         int length=0;
@@ -120,7 +126,8 @@ public class LibraryServices {
         }
         return updated_row;
     }
-public void LibraryDetails(){
+public int LibraryDetails(){
+        int count = 0;
         try{
             connection = libraryGetConnection.getconnect();
 
@@ -135,6 +142,7 @@ public void LibraryDetails(){
         {
             e.printStackTrace();
         }
+    return count;
 }
 }
 
