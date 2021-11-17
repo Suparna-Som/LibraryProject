@@ -18,11 +18,7 @@ public class LibraryController {
     LibraryServices libraryServices;
     List<LibraryModel> libraryDataList = new ArrayList<>();
 
-//    @PostMapping("/saveLibraryDetails")
-//    public LibraryModel saveOrderDetails(@RequestBody LibraryModel libraryModel){
-//       LibraryModel storeLibraryDetail = libraryServices.saveLibraryDetails(libraryModel);
-//        return storeLibraryDetail;
-//    }
+
     @PostMapping("/storeLibraryDetails")
     public int saveLibraryDetails(@RequestParam int studentId, @RequestParam String studentName, @RequestParam String bookName, @RequestParam String issueDate, @RequestParam String returnDate, @RequestParam int numberOfBook, @RequestParam String librarian){
     int storeLibraryDetail=0;
@@ -40,17 +36,17 @@ public class LibraryController {
     }
 
     @PutMapping("/updateLibraryDetails")
-    public int updateLibraryDetails(@RequestParam int studentId,@RequestParam String bookName){
+    public int updateLibraryDetails(@RequestParam int srNo,@RequestParam String bookName){
     int updatedRow = 0;
-    updatedRow = libraryServices.updateLibraryDetail(studentId,bookName);
+    updatedRow = libraryServices.updateLibraryDetail(srNo,bookName);
     return updatedRow;
     }
 
     @DeleteMapping("/deleteLibraryDetails")
-    public int deleteLibraryDetail(@RequestParam int studentId) throws IOException {
+    public int deleteLibraryDetail(@RequestParam int srNo) throws IOException {
         //int studentId=3;
         int deletedRow=0;
-        deletedRow=libraryServices.deleteLibraryDetail(studentId);
+        deletedRow=libraryServices.deleteLibraryDetail(srNo);
         return deletedRow;
     }
     @GetMapping("/totalLibraryDetails")

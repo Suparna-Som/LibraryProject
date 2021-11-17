@@ -28,7 +28,7 @@ public class LibraryServices {
     @Autowired
     private Gson gson;
 
-    public int saveLibraryDetails( int studentId, String studentName, String bookName, String issueDate, String returnDate, int numberOfBook, String librarian){
+    public int saveLibraryDetails(int studentId, String studentName, String bookName, String issueDate, String returnDate, int numberOfBook, String librarian){
         int show = 0;
         try {
 
@@ -72,7 +72,7 @@ public class LibraryServices {
 
             while (result.next()) {
 
-            libraryModels[length] = new LibraryModel(result.getInt(1),result.getInt(6),result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getString(7));
+            libraryModels[length] = new LibraryModel(result.getInt(2),result.getInt(7),result.getString(3),result.getString(4),result.getString(5),result.getString(6),result.getString(8));
                 libraryModelList.add(libraryModels[length]);
 
             }
@@ -85,14 +85,14 @@ public class LibraryServices {
         return libraryModelList;
     }
 
-    public int deleteLibraryDetail(int studentId)
+    public int deleteLibraryDetail(int srNo)
     {
         int rowsAffected=0;
         try {
             connection = libraryGetConnection.getconnect();
             Statement stmt = connection.createStatement();
             PreparedStatement ps = connection.prepareStatement(libraryDAO.deleteLibraryData);
-            ps.setInt(1,studentId);
+            ps.setInt(1,srNo);
             rowsAffected = ps.executeUpdate();
             System.out.println("Successfully record deleted");
             showAllLibraryDetail();
@@ -106,14 +106,14 @@ public class LibraryServices {
         return rowsAffected;
     }
 
-    public int updateLibraryDetail(int studentId, String bookName){
+    public int updateLibraryDetail(int srNo, String bookName){
         int updated_row=0;
         try {
             connection = libraryGetConnection.getconnect();
             Statement stmt = connection.createStatement();
             PreparedStatement ps = connection.prepareStatement(libraryDAO.updateLibraryData);
             ps.setString(1,bookName);
-            ps.setInt(2,studentId);
+            ps.setInt(2,srNo);
             updated_row = ps.executeUpdate();
             System.out.println("Records Updated Successfully");
             showAllLibraryDetail();
